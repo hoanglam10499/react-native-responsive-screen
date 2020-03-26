@@ -13,11 +13,11 @@ let screenHeight = Dimensions.get('window').height;
  *                               along with the percentage symbol (%).
  * @return {number}              The calculated dp depending on current device's screen width.
  */
-const widthPercentageToDP = (widthPercent) => {
+const wp = (widthPercent) => {
 	// Parse string percentage input and convert it to number.
 	const elemWidth =
 		typeof widthPercent === 'number'
-			? widthPercent / 10
+			? screenWidth * (screenWidth - widthPercent) / 100 / 10
 			: parseFloat(widthPercent);
 
 	// Use PixelRatio.roundToNearestPixel method in order to round the layout
@@ -31,11 +31,11 @@ const widthPercentageToDP = (widthPercent) => {
  *                                along with the percentage symbol (%).
  * @return {number}               The calculated dp depending on current device's screen height.
  */
-const heightPercentageToDP = (heightPercent) => {
+const hp = (heightPercent) => {
 	// Parse string percentage input and convert it to number.
 	const elemHeight =
 		typeof heightPercent === 'number'
-			? heightPercent / 10
+			? screenHeight * (screenHeight - heightPercent) / 100 / 10
 			: parseFloat(heightPercent);
 
 	// Use PixelRatio.roundToNearestPixel method in order to round the layout
@@ -52,7 +52,7 @@ const heightPercentageToDP = (heightPercent) => {
  * @param {object} that Screen's class component this variable. The function needs it to
  *                      invoke setState method and trigger screen rerender (this.setState()).
  */
-const listenOrientationChange = (that) => {
+const loc = (that) => {
 	Dimensions.addEventListener('change', (newDimensions) => {
 		// Retrieve and save new dimensions
 		screenWidth = newDimensions.window.width;
@@ -78,8 +78,8 @@ const listenOrientationChange = (that) => {
  * listenOrientationChange function has been invoked. This should be done in order to
  * avoid adding new listeners every time the same component is re-mounted.
  */
-const removeOrientationListener = () => {
+const rol = () => {
 	Dimensions.removeEventListener('change', () => {});
 };
 
-export { widthPercentageToDP, heightPercentageToDP, listenOrientationChange, removeOrientationListener };
+export { wp, hp, loc, rol };

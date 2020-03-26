@@ -1,17 +1,11 @@
 // @flow
 
-import type { Component } from "react";
+import type { Component } from 'react';
 
-declare export function widthPercentageToDP(
-  widthPercent: string | number
-): number;
+declare export function wp(widthPercent: string | number): number;
 
-declare export function heightPercentageToDP(
-  heightPercent: string | number
-): number;
+declare export function hp(heightPercent: string | number): number;
 
-declare export function listenOrientationChange(
-  screenClassComponent: Component<any, any>
-): void;
+declare export function loc(screenClassComponent: Component<any, any>): void;
 
-declare export function removeOrientationListener(): void;
+declare export function rol(): void;
