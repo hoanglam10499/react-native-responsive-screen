@@ -13,7 +13,7 @@ let screenHeight = Dimensions.get('window').height;
  *                               along with the percentage symbol (%).
  * @return {number}              The calculated dp depending on current device's screen width.
  */
-const wp = (widthPercent) => {
+const widthPercentageToDP = (widthPercent) => {
 	// Parse string percentage input and convert it to number.
 	const elemWidth = typeof widthPercent === 'number' ? widthPercent / 10 : parseFloat(widthPercent);
 
@@ -28,7 +28,7 @@ const wp = (widthPercent) => {
  *                                along with the percentage symbol (%).
  * @return {number}               The calculated dp depending on current device's screen height.
  */
-const hp = (heightPercent) => {
+const heightPercentageToDP = (heightPercent) => {
 	// Parse string percentage input and convert it to number.
 	const elemHeight = typeof heightPercent === 'number' ? heightPercent / 10 : parseFloat(heightPercent);
 
@@ -46,7 +46,7 @@ const hp = (heightPercent) => {
  * @param {object} that Screen's class component this variable. The function needs it to
  *                      invoke setState method and trigger screen rerender (this.setState()).
  */
-const loc = (that) => {
+const listenOrientationChange = (that) => {
 	Dimensions.addEventListener('change', (newDimensions) => {
 		// Retrieve and save new dimensions
 		screenWidth = newDimensions.window.width;
@@ -72,8 +72,8 @@ const loc = (that) => {
  * listenOrientationChange function has been invoked. This should be done in order to
  * avoid adding new listeners every time the same component is re-mounted.
  */
-const rol = () => {
+const removeOrientationListener = () => {
 	Dimensions.removeEventListener('change', () => {});
 };
 
-export { wp, hp, loc, rol };
+export { widthPercentageToDP, heightPercentageToDP, listenOrientationChange, removeOrientationListener };
